@@ -149,8 +149,43 @@ init_mathjax();
           </div>
           
         </header>
-    <div id="tipue_search_content">分組名單 << <a href='分組名單.html'>Previous</a> <a href='Solvespace操作.html'>Next</a> >> Solvespace操作<br /><h1>Solvespace</h1>
-<br />分組名單 << <a href='分組名單.html'>Previous</a> <a href='Solvespace操作.html'>Next</a> >> Solvespace操作</div>
+    <div id="tipue_search_content">Solvespace操作 << <a href='Solvespace操作.html'>Previous</a> <br /><h1>Solvespace編譯</h1>
+<h4>下載可攜程式系統(並解壓縮):</h4>
+<p><a href="https://drive.google.com/file/d/1fxMdqdCoCL__O1IpZ-Sv-A_4-c77Wx4E/view?usp=sharing">2019Fall可攜套件.7z</a></p>
+<p>&gt;&gt;start_mdecourse.bat</p>
+<h4>編譯步驟:</h4>
+<p>檢查<span>Y:\home_mdecourse\.gitconfig  是否為ipv6 or ipv4 如在家中電腦大部分為ipv4網路(且要從虎科大校園網路登入SSL-VPN)  在proxy到系館ip才可正常運作 p.s如果沒有.gitconfig檔則自行創建 。 (ipv6 proxy = [2001:288:6004:XX::XX]:3128)</span></p>
+<p><span><img alt="" height="534" src="./../images/imp2.jpg" width="559"/></span></p>
+<p>先將 Y:\portablegit\bin\sh.exe 改名為 sh_rename_for_solvespace.exe (透過 MSYS2 執行 shell 指令, 而非 portablegit 中的 sh.exe)</p>
+<p>開啟任意cmd視窗</p>
+<p>git version 查驗 git 版本</p>
+<p>git 2.13 版本以上, 可以使用下列 git clone<span> </span><span>--recurse-submodules 取得所有子模組資料</span></p>
+<p>git clone --recurse-submodules https://github.com/solvespace/solvespace.git solvespace</p>
+<p><img alt="" height="494" src="./../images/img1.jpg" width="961"/></p>
+<p>edit Y:\tmp\40523120\solvespace\extlib\angle\CMakeLists.txt comment out line 713 and 714</p>
+<p>#list(APPEND ANGLE_DEFINITIONS<br/>#"-DANGLE_PRELOADED_D3DCOMPILER_MODULE_NAMES={ \"d3dcompiler_47.dll\", \"d3dcompiler_46.dll\", \"d3dcompiler_43.dll\" }")<br/>endif()</p>
+<p>接著需要手動進行 libpng.dll.a 的編譯, 並改名為 libpng_static.a, 並放到編譯系統的 lib 目錄中 (即隨身系統的 msys64\mingw64\lib 目錄):</p>
+<p>cd solvespace</p>
+<p>cd extlib</p>
+<p>cd libpng</p>
+<p>mkdir build</p>
+<p>cd build</p>
+<p>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release<br/>mingw32-make</p>
+<p>(mingw32-make -Wl,-static)</p>
+<p>rename libpng.dll.a to libpng_static.a and copy to Y:\msys64\mingw64\lib</p>
+<p>接著回到 solvespace 原始碼目錄, 建立 build 目錄後進入 build 目錄, 執行:</p>
+<p><span>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release</span></p>
+<p><span><img alt="" height="492" src="./../images/img3.jpg" width="960"/></span></p>
+<p>等待總是漫長~</p>
+<p>完成後 <span>mingw32-make</span></p>
+<p><img alt="" height="492" src="./../images/img4.jpg" width="961"/></p>
+<p>全部編譯完成即可在windows開啟 solvespace 應用程式</p>
+<p><img alt="" height="495" src="./../images/img5.jpg" width="963"/></p>
+<h4>參考資料:</h4>
+<p><a href="https://2019wcm.blogspot.com/2019/03/msys2-solvespace.html">https://2019wcm.blogspot.com/2019/03/msys2-solvespace.html</a></p>
+<p><a href="https://github.com/solvespace/solvespace">https://github.com/solvespace/solvespace</a></p>
+<p><a href="http://mde.tw/cad2019/content/Solvespace%20%E7%B7%A8%E8%AD%AF.html">http://mde.tw/cad2019/content/Solvespace%20%E7%B7%A8%E8%AD%AF.html</a></p>
+<p></p><br />Solvespace操作 << <a href='Solvespace操作.html'>Previous</a> </div>
         
     <!-- footer -->
       <div class="container">
